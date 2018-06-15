@@ -1,0 +1,37 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 26
+    defaultConfig {
+        applicationId "com.eastwood.demo"
+        minSdkVersion 14
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:appcompat-v7:26.1.0'
+
+    api project(':auto-inject-core')
+
+    api project(':modules:moduleB')
+    api project(':modules:moduleC')
+
+}
+
+apply plugin: 'auto-inject'
+
+autoInject {
+    showLog = true
+    filterPackages = ['android', 'com/google', 'com.hianalytics.android']
+}

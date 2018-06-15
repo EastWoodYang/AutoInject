@@ -1,0 +1,5 @@
+include ':app', 'modules:moduleB', 'modules:moduleC'
+
+include ':auto-inject-core'
+
+includeBuild './auto-inject-plugin'

@@ -1,0 +1,17 @@
+apply plugin: 'groovy'
+apply plugin: 'java'
+
+group 'com.eastwood.tools.plugins'
+sourceCompatibility = 1.8
+
+repositories {
+    jcenter()
+    google()
+}
+
+dependencies {
+    compile gradleApi()
+    compile localGroovy()
+    compile 'com.android.tools.build:gradle:3.0.1'
+    compile 'org.ow2.asm:asm:6.0'
+}
