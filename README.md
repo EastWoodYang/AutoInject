@@ -1,35 +1,19 @@
-# AutoRegister
+# AutoInject
+结合Transform＋ASM，在编译期进行代码注入。
 
-#### 在编译期，通过收集相关被标记的类，注入到被标记的方法中，自动初始化并执行被标记的类中的方法。
-
-适用的业务场景：
-
-* 跨模块公共库的初始化，需要初始化的信息分散在不同模块中，比如Router。
-
+## 设计原型
+利用弓把对应型号的箭射向耙子。
+ 
+箭：提供对象。
+弓：获取对象，并执行相关动作。
+耙：在什么位置执行。
 
 ## Usage
 
-### @AutoTarget
-用于标记要注入代码的位置，只能标记在方法上。
-
-    // name 表示目标位置的名称，需自定义
-    @AutoTarget(name = "routerInit")
-    void routerInit() {}
-
-    // 可不填name，默认取方法名称。
-    @AutoTarget
-    void routerInit() {}
-
-    // 可定义多个别名
-    @AutoTarget(name = {"routerInit", "***Init"})
-    void init() {}
-
 ### @AutoArrow
-用于获取需要被注入的信息。
-被标记的类需要实现IAutoArrow接口，并在get方法中返回需要被注入的信息。
-
-
-    // model 表示被注入的信息的类型，需自定义
+为弓提供对象。
+新建一个类，并实现IAutoArrow接口，在get方法中返回对象。
+    // model 表示类型
     @AutoArrow(model = "router")
     public class RouterAutoArrow implements IAutoArrow<RouterInfoIndex> {
 
@@ -39,10 +23,9 @@
         }
     }
 
-
 ### @AutoBow
-用于适配目标位置和被注入信息的类型。
-被标记的类需要实现IAutoBow接口，并在shoot方法中执行相关动作。
+获取对象，并执行相关动作。
+新建一个类，并实现IAutoBow接口，在shoot方法中获取对象并执行相关动作。
 
     // target 表示目标位置的名称
     // model  表示被注入的信息的类型
@@ -56,11 +39,32 @@
 
     }
 
-### @AutoBowTarget
-被标记的类需要实现IAutoBowArrow接口，并在shoot方法中执行相关动作。
+### @AutoTarget
+在什么位置执行。
+预先定义一个空方法并调用，在方法上标记@AutoTarget，例如：
 
-    // target 表示目标位置的名称
-    // model  表示被注入的信息的类型
+
+    void onCreate() {
+        routerInit();
+    }
+    
+    // name 表示位置的名称
+    @AutoTarget(name = "routerInit")
+    void routerInit() {}
+
+    // 可不填name，默认取方法名称。
+    @AutoTarget
+    void routerInit() {}
+
+    // 可定义多个别名
+    @AutoTarget(name = {"routerInit", "***Init"})
+    void init() {}
+
+### @AutoBowArrow
+直接在shoot方法中，执行相关动作。
+新建一个类，并实现IAutoBowArrow接口，在shoot方法中执行相关动作。
+
+    // target 表示位置的名称
     @AutoBowArrow(target = "init")
     public class InitAutoBowArrow implements IAutoBowArrow {
 
@@ -71,9 +75,8 @@
 
     }
 
-### 自动初始化并执行
-
-比如将被注入的代码如下：
+### 被注入的代码
+被注入的代码样式固定，例如：
 
     @AutoTarget
     void routerInit() {
