@@ -16,6 +16,7 @@
 为弓提供对象。
 
 新建一个类，并实现IAutoArrow接口，在get方法中返回对象。
+
     // model 表示类型
     @AutoArrow(model = "router")
     public class RouterAutoArrow implements IAutoArrow<RouterInfoIndex> {
