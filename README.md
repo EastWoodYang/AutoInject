@@ -3,15 +3,18 @@
 
 ## 设计原型
 利用弓把对应型号的箭射向耙子。
- 
+
 箭：提供对象。
+
 弓：获取对象，并执行相关动作。
+
 耙：在什么位置执行。
 
 ## Usage
 
 ### @AutoArrow
 为弓提供对象。
+
 新建一个类，并实现IAutoArrow接口，在get方法中返回对象。
     // model 表示类型
     @AutoArrow(model = "router")
@@ -25,6 +28,7 @@
 
 ### @AutoBow
 获取对象，并执行相关动作。
+
 新建一个类，并实现IAutoBow接口，在shoot方法中获取对象并执行相关动作。
 
     // target 表示目标位置的名称
@@ -41,6 +45,7 @@
 
 ### @AutoTarget
 在什么位置执行。
+
 预先定义一个空方法并调用，在方法上标记@AutoTarget，例如：
 
 
@@ -62,6 +67,7 @@
 
 ### @AutoBowArrow
 直接在shoot方法中，执行相关动作。
+
 新建一个类，并实现IAutoBowArrow接口，在shoot方法中执行相关动作。
 
     // target 表示位置的名称
