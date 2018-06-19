@@ -15,3 +15,40 @@ dependencies {
     compile 'com.android.tools.build:gradle:3.0.1'
     compile 'org.ow2.asm:asm:6.0'
 }
+
+//apply plugin: 'maven'
+//
+//def groupId = 'com.eastwood.tools.plugins'
+//def artifactId = 'auto-inject'
+//def version = '1.0.0'
+//
+//def localReleaseDest = "${buildDir}/release/${version}"
+//
+//uploadArchives {
+//    repositories {
+//        mavenDeployer {
+//            pom.groupId = groupId
+//            pom.artifactId = artifactId
+//            pom.version = version
+//            // Add other pom properties here if you want (developer details / licenses)
+//            repository(url: "file://${localReleaseDest}")
+//        }
+//    }
+//}
+//
+//
+//task zipRelease(type: Zip) {
+//    from localReleaseDest
+//    destinationDir buildDir
+//    archiveName "release-${version}.zip"
+//}
+//
+//task generateRelease {
+//    doLast {
+//        println "Release ${version} can be found at ${localReleaseDest}/"
+//        println "Release ${version} zipped can be found ${buildDir}/release-${version}.zip"
+//    }
+//}
+//
+//generateRelease.dependsOn(uploadArchives)
+//generateRelease.dependsOn(zipRelease)

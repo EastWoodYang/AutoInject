@@ -19,7 +19,7 @@ class AutoInjectPlugin implements Plugin<Project> {
         project.afterEvaluate {
             Logger.project = project
             Logger.showLog = project.autoInject.showLog
-            AutoInjector.filterPackages = project.autoInject.filterPackages
+            AutoInjector.ignorePackages = project.autoInject.ignorePackages
         }
 
     }

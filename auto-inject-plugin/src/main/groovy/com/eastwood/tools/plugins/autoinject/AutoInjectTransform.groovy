@@ -17,7 +17,6 @@ class AutoInjectTransform extends Transform {
     private Project project;
 
     public AutoInjectTransform(Project project) {
-        println "------------AutoInjectTransform"
         this.project = project
     }
 

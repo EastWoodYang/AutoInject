@@ -4,6 +4,6 @@ public class AutoInjectExtension {
 
     boolean showLog
 
-    String[] filterPackages
+    String[] ignorePackages
 
 }

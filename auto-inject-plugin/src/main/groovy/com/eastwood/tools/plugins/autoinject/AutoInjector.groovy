@@ -16,7 +16,7 @@ class AutoInjector {
     public static List<AutoClassInfo> autoBowInfoList = new ArrayList<>()
     public static List<AutoClassInfo> autoArrowInfoList = new ArrayList()
 
-    public static String[] filterPackages
+    public static String[] ignorePackages
 
     private final static BowArrowClassAdapter bowArrowClassAdapter = new BowArrowClassAdapter()
 
@@ -139,7 +139,7 @@ class AutoInjector {
             classReader.accept(targetClassAdapter, 0)
         } catch (Exception e) {
             String tip = "\nRead class failed when find target in source: " + source.name + "[" + source.absolutePath + "]."
-            tip += "\n* Try:\n" + "     use autoInject { filterPackages = ... } to skip this source If necessary."
+            tip += "\n* Try:\n" + "     use autoInject { ignorePackages = ... } to skip this source If necessary."
             tip += "\n* Exception:\n     " + e.toString()
             for (int i = 0; i < e.stackTrace.size(); i++) {
                 tip += "\n         " + e.stackTrace[i].toString()
@@ -201,10 +201,10 @@ class AutoInjector {
     }
 
     public static boolean filterPackage(String filename) {
-        if (filterPackages == null) return false
+        if (ignorePackages == null) return false
 
-        for (int i = 0; i < filterPackages.size(); i++) {
-            if (filename.startsWith(filterPackages[i])) {
+        for (int i = 0; i < ignorePackages.size(); i++) {
+            if (filename.startsWith(ignorePackages[i])) {
                 return true
             }
         }
