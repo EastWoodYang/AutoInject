@@ -121,7 +121,7 @@ and add dependency to module build.gradle
     }
 
 ## 被注入的代码
-被注入的代码样式固定，例如：
+打包成apk后，@AutoTarget对应的方法将会被注入具有固定结构的代码，例如：
 
     @AutoTarget
     void addIndex2EventBus() {
