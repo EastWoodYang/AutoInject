@@ -23,8 +23,7 @@ dependencies {
 
     implementation project(':auto-inject-core') // or implementation 'com.eastwood.common:auto-inject:1.0.0'
 
-    api project(':modules:moduleB')
-    api project(':modules:moduleC')
+    implementation 'org.greenrobot:eventbus:3.1.1'
 
 }
 
@@ -32,5 +31,5 @@ apply plugin: 'auto-inject'
 
 autoInject {
     showLog = true
-    ignorePackages = ['android', 'com/google', 'com.hianalytics.android']
+    ignorePackages = ['android', 'com/google', 'com/hianalytics/android']
 }

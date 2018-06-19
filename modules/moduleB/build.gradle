@@ -8,6 +8,15 @@ android {
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [
+                        eventBusIndex : 'com.eastwood.demo.eventbus.ModuleBEventBusIndex',
+                        showLog:'false'
+                ]
+            }
+        }
     }
 
     buildTypes {
@@ -20,4 +29,7 @@ android {
 
 dependencies {
     api project(':auto-inject-core')
+
+    implementation 'org.greenrobot:eventbus:3.1.1'
+    annotationProcessor 'org.greenrobot:eventbus-annotation-processor:3.1.1'
 }

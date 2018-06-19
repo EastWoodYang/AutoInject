@@ -139,7 +139,7 @@ class AutoInjector {
             classReader.accept(targetClassAdapter, 0)
         } catch (Exception e) {
             String tip = "\nRead class failed when find target in source: " + source.name + "[" + source.absolutePath + "]."
-            tip += "\n* Try:\n" + "     use autoInject { ignorePackages = ... } to skip this source If necessary."
+            tip += "\n* Try:\n" + "     use autoInject { ignorePackages = ... } to ignore this source If necessary."
             tip += "\n* Exception:\n     " + e.toString()
             for (int i = 0; i < e.stackTrace.size(); i++) {
                 tip += "\n         " + e.stackTrace[i].toString()

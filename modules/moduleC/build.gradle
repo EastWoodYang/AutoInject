@@ -11,9 +11,8 @@ android {
 
         javaCompileOptions {
             annotationProcessorOptions {
-                includeCompileClasspath false
                 arguments = [
-                        routerIndex:'com.winwin.common.router.ModuleCRouterIndex',
+                        eventBusIndex : 'com.eastwood.demo.eventbus.ModuleCEventBusIndex',
                         showLog:'false'
                 ]
             }
@@ -29,7 +28,8 @@ android {
 }
 
 dependencies {
-
     api project(':auto-inject-core')
 
+    implementation 'org.greenrobot:eventbus:3.1.1'
+    annotationProcessor 'org.greenrobot:eventbus-annotation-processor:3.1.1'
 }

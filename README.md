@@ -4,44 +4,78 @@
 ## 设计原型
 利用弓把对应型号的箭射向耙子。
 
-箭：提供对象。
+Arror：提供对象。
 
-弓：获取对象，并执行相关动作。
+Bow：获取对象，并执行相关动作。
 
-耙：在什么位置执行。
+Target：在什么位置执行。
+
+
+<img src='https://github.com/EastWoodYang/AutoInject/blob/master/picture/1.png'/>
+
 
 ## Usage
+
+Add buildscript dependency in root project build.gradle
+
+    buildscript {
+        
+        ... 
+        
+        dependencies {
+     
+            ...
+            classpath 'com.eastwood.tools.plugins:auto-inject:1.0.0'
+            
+        }
+        
+    }
+
+and add dependency to module build.gradle
+
+    dependencies {
+     
+        ...
+        implementation 'com.eastwood.common:auto-inject:1.0.0'
+         
+    }
 
 ### @AutoArrow
 为弓提供对象。
 
-新建一个类，并实现IAutoArrow接口，在get方法中返回对象。
+新建一个类，并实现IAutoArrow接口，在get方法中返回对象。例如：
 
     // model 表示类型
-    @AutoArrow(model = "router")
-    public class RouterAutoArrow implements IAutoArrow<RouterInfoIndex> {
-
+    @AutoArrow(model = "eventBusIndex")
+    public class ModuleBAutoArrow implements IAutoArrow<SubscriberInfoIndex> {
+     
         @Override
-        public RouterInfoIndex get() {
-            return new ModuleRouterIndex();
+        public SubscriberInfoIndex get() {
+            return new ModuleBEventBusIndex();
         }
+     
     }
 
 ### @AutoBow
 获取对象，并执行相关动作。
 
-新建一个类，并实现IAutoBow接口，在shoot方法中获取对象并执行相关动作。
+新建一个类，并实现IAutoBow接口，在shoot方法中获取对象并执行相关动作。例如：
 
-    // target 表示目标位置的名称
-    // model  表示被注入的信息的类型
-    @AutoBow(target = "routerInit", model = "router")
-    public class RouterAutoBow implements IAutoBow<RouterInfoIndex> {
 
-        @Override
-        public void shoot(RouterInfoIndex routerInfoIndex) {
-            Router.addRouterIndex(routerInfoIndex);
+    @AutoBow(target = "addIndex2EventBus", model = "eventBusIndex", context = true)
+    public class EventBusAutoBow implements IAutoBow<SubscriberInfoIndex> {
+     
+        private App app;
+     
+        EventBusAutoBow(Application application) {
+            app = (App) application;
         }
-
+     
+        @Override
+        public void shoot(SubscriberInfoIndex index) {
+            app.eventBusBuilder.addIndex(index);
+        }
+     
     }
 
 ### @AutoTarget
@@ -50,21 +84,25 @@
 预先定义一个空方法并调用，在方法上标记@AutoTarget，例如：
 
 
-    void onCreate() {
-        routerInit();
-    }
+    public class App extends Application {
+     
+        public EventBusBuilder eventBusBuilder;
+     
+        @Override
+        public void onCreate() {
+            super.onCreate();
+     
+            eventBusBuilder = EventBus.builder();
+            // add config to eventBusBuilder
+            addIndex2EventBus();
+            eventBusBuilder.build();
     
-    // name 表示位置的名称
-    @AutoTarget(name = "routerInit")
-    void routerInit() {}
-
-    // 可不填name，默认取方法名称。
-    @AutoTarget
-    void routerInit() {}
-
-    // 可定义多个别名
-    @AutoTarget(name = {"routerInit", "***Init"})
-    void init() {}
+        }
+     
+        @AutoTarget
+        void addIndex2EventBus() {}
+    
+    }
 
 ### @AutoBowArrow
 直接在shoot方法中，执行相关动作。
@@ -86,12 +124,12 @@
 被注入的代码样式固定，例如：
 
     @AutoTarget
-    void routerInit() {
-        RouterAutoBow routerAutoBow = new RouterAutoBow();
-        RouterAutoArrow routerAutoArrow = new RouterAutoArrow();
-        routerAutoBow.shoot(routerAutoArrow.get());
+    void addIndex2EventBus() {
+        ModuleBAutoArrow moduleBAutoArrow = new ModuleBAutoArrow();
+        EventBusAutoBow eventBusAutoBow = new EventBusAutoBow();
+        eventBusAutoBow.shoot(moduleBAutoArrow.get());
     }
-
+     
     @AutoTarget
     void init() {
         InitAutoBowArrow initAutoBowArrow = new InitAutoBowArrow();
