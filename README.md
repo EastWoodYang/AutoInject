@@ -72,12 +72,22 @@ Android 通用的组件自动注册、自动初始化方式
         
     }
 
-继续在模块build.gradle中添加注解库依赖：
+在模块的build.gradle中添加注解库依赖：
 
     dependencies {
         ...
         implementation 'com.eastwood.common:auto-inject:1.0.0'
          
+    }
+    
+在主模块的build.gradle中引用插件：
+    
+    
+    apply plugin: 'auto-inject'
+     
+    autoInject {
+        showLog = true
+        ignorePackages = ['android', 'com/google', 'com/hianalytics/android']
     }
 
 #### @AutoTarget
