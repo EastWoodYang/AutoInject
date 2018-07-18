@@ -1,5 +1,5 @@
 # AutoInject
-Android 通用的组件自动注册、自动初始化方式
+Android 通用的组件自动注册、自动初始化解决方案
 
 ## 背景问题
 我们在组件化的过程，业务被拆分至独立的Module中，一些公用组件会在各个Module中通过APT生成一些需要被注册至组件中的信息类，比如EventBus生成的Index类。我们这边RN定制的Plugin是跟随各自module，需要被注册。还有，各Module对外提供的api接口的话，也需要被注册。
