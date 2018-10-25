@@ -67,7 +67,7 @@ Android 通用的组件自动注册、自动初始化解决方案
         ... 
         dependencies {
             ...
-            classpath 'com.eastwood.tools.plugins:auto-inject:1.0.0'
+            classpath 'com.eastwood.tools.plugins:auto-inject:1.0.1'
         }
         
     }
