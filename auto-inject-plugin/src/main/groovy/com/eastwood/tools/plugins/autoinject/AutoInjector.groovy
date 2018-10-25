@@ -92,7 +92,7 @@ class AutoInjector {
             }
 
             if (tempModifiedClassByteMap.size() != 0) {
-                File tempJar = new File(source.absolutePath.replace('.jar', '1.jar'))
+                File tempJar = new File(source.absolutePath.replace('.jar', 'temp.jar'))
                 if (tempJar.exists())
                     tempJar.delete()
 
