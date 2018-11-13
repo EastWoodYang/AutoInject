@@ -67,7 +67,7 @@ Android 通用的组件自动注册、自动初始化解决方案
         ... 
         dependencies {
             ...
-            classpath 'com.eastwood.tools.plugins:auto-inject:1.0.1'
+            classpath 'com.eastwood.tools.plugins:auto-inject:1.0.2'
         }
         
     }
@@ -87,7 +87,7 @@ Android 通用的组件自动注册、自动初始化解决方案
      
     autoInject {
         showLog = true
-        ignorePackages = ['android', 'com/google', 'com/hianalytics/android']
+        ignorePackages = ['android', 'com/google']
     }
 
 #### @AutoTarget
@@ -163,7 +163,7 @@ Android 通用的组件自动注册、自动初始化解决方案
     }
     
 ### 两种组合方式
-* @AutoArrow + @AutoBow + @AutoTarget，三者关系为 **n:1:1**
+* @AutoArrow + @AutoBow + @AutoTarget，三者比例关系为 **n:1:1**
 
 * @AutoBowArrow + @AutoTarget ，两者比例关系为 **1:1**
 
