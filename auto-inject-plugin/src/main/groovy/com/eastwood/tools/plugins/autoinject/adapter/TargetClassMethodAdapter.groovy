@@ -25,7 +25,7 @@ class TargetClassMethodAdapter extends MethodVisitor {
     private boolean contextStack
 
     TargetClassMethodAdapter() {
-        super(Opcodes.ASM4)
+        super(Opcodes.ASM5)
     }
 
     void set(MethodVisitor methodVisitor, String className, String methodName, String desc) {
@@ -101,7 +101,7 @@ class TargetClassMethodAdapter extends MethodVisitor {
                 mv.visitInsn(Opcodes.DUP)
                 if (autoClassInfo.initDesc != "()V") {
                     contextStack = true
-                    mv.visitVarInsn(Opcodes.ALOAD, 0);
+                    mv.visitVarInsn(Opcodes.ALOAD, 0)
                 }
                 mv.visitMethodInsn(Opcodes.INVOKESPECIAL, autoClassInfo.className, '<init>', autoClassInfo.initDesc, false)
                 mv.visitVarInsn(Opcodes.ASTORE, offset + i + 1)
@@ -119,7 +119,7 @@ class TargetClassMethodAdapter extends MethodVisitor {
                 mv.visitInsn(Opcodes.DUP)
                 if (autoClassInfo.initDesc != "()V") {
                     contextStack = true
-                    mv.visitVarInsn(Opcodes.ALOAD, 0);
+                    mv.visitVarInsn(Opcodes.ALOAD, 0)
                 }
                 mv.visitMethodInsn(Opcodes.INVOKESPECIAL, autoClassInfo.className, '<init>', autoClassInfo.initDesc, false)
                 mv.visitVarInsn(Opcodes.ASTORE, offset + i + 1)
@@ -131,7 +131,7 @@ class TargetClassMethodAdapter extends MethodVisitor {
 
                 Logger.i("-- arrow      , model: " + autoClassInfo.model + ', className: ' + autoClassInfo.className + ', returnDesc: ' + autoClassInfo.returnDesc)
             } else {
-                throw new GradleScriptException("Unknown AutoType: " + autoClassInfo.toString(), null);
+                throw new GradleScriptException("Unknown AutoType: " + autoClassInfo.toString(), null)
             }
         }
     }

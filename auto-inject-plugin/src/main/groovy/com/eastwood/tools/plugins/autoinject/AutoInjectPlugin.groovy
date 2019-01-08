@@ -11,7 +11,7 @@ class AutoInjectPlugin implements Plugin<Project> {
         def isApp = project.plugins.hasPlugin(AppPlugin)
         if (!isApp) return
 
-        project.extensions.create("autoInject", AutoInjectExtension.class);
+        project.extensions.create("autoInject", AutoInjectExtension.class)
 
         def android = project.extensions.getByType(AppExtension)
         android.registerTransform(new AutoInjectTransform(project))

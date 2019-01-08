@@ -14,7 +14,7 @@ import org.gradle.api.Project
 
 class AutoInjectTransform extends Transform {
 
-    private Project project;
+    private Project project
 
     public AutoInjectTransform(Project project) {
         this.project = project

@@ -11,7 +11,7 @@ class TargetClassAdapter extends ClassVisitor {
     String className
 
     TargetClassAdapter() {
-        super(Opcodes.ASM4)
+        super(Opcodes.ASM5)
     }
 
     void set(ClassVisitor classWriter, OnMethodInjectListener onMethodInjectListener) {

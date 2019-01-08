@@ -25,7 +25,7 @@ class BowArrowClassAdapter extends ClassVisitor {
     private List<String> getMethodDescList
 
     BowArrowClassAdapter() {
-        super(Opcodes.ASM4)
+        super(Opcodes.ASM5)
     }
 
     @Override
@@ -78,7 +78,7 @@ class BowArrowClassAdapter extends ClassVisitor {
         if (autoClassInfo != null) {
             if (name == '<init>') {
                 if (autoClassInfo.initDesc != null) {
-                    throw new GradleScriptException("class " + classname + " has multi-<init>.", null);
+                    throw new GradleScriptException("class " + classname + " has multi-<init>.", null)
                 } else if (context && desc == '()V') {
                     throw new GradleScriptException("class " + classname + " need context, but has a non-parameter constructor.", null)
                 } else if (!context && desc != '()V') {
@@ -101,7 +101,7 @@ class BowArrowClassAdapter extends ClassVisitor {
             AutoType autoType = autoClassInfo.getAutoType()
             if (autoType == AutoType.ARROW) {
                 if (!interfaces.contains(AUTO_ARROW_INTERFACE_BYTECODE)) {
-                    throw new GradleScriptException("class " + classname + " should implements " + AUTO_ARROW_INTERFACE_BYTECODE + " directly.", null);
+                    throw new GradleScriptException("class " + classname + " should implements " + AUTO_ARROW_INTERFACE_BYTECODE + " directly.", null)
                 }
 
                 if (this.signature == null) {
@@ -110,16 +110,16 @@ class BowArrowClassAdapter extends ClassVisitor {
 
                 String returnDesc = getReturnDesc()
                 if (returnDesc == null) {
-                    throw new GradleScriptException("can't find returnDesc of class " + classname + ".get(...).", null);
+                    throw new GradleScriptException("can't find returnDesc of class " + classname + ".get(...).", null)
                 }
                 autoClassInfo.returnDesc = returnDesc
             } else if (autoType == AutoType.BOW) {
                 if (!interfaces.contains(AUTO_BOW_INTERFACE_BYTECODE)) {
-                    throw new GradleScriptException("class " + classname + " should implements " + AUTO_BOW_INTERFACE_BYTECODE + " directly.", null);
+                    throw new GradleScriptException("class " + classname + " should implements " + AUTO_BOW_INTERFACE_BYTECODE + " directly.", null)
                 }
             } else if (autoType == AutoType.BOW_ARROW) {
                 if (!interfaces.contains(AUTO_BOW_ARROW_INTERFACE_BYTECODE)) {
-                    throw new GradleScriptException("class " + classname + " should implements " + AUTO_BOW_ARROW_INTERFACE_BYTECODE + " directly.", null);
+                    throw new GradleScriptException("class " + classname + " should implements " + AUTO_BOW_ARROW_INTERFACE_BYTECODE + " directly.", null)
                 }
             }
             autoClassInfo.className = classname

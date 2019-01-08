@@ -8,7 +8,7 @@ class AnnotationAdapter extends AnnotationVisitor {
     OnAnnotationValueListener valueListener
 
     AnnotationAdapter(AnnotationVisitor annotationVisitor, OnAnnotationValueListener listener) {
-        super(Opcodes.ASM4, annotationVisitor)
+        super(Opcodes.ASM5, annotationVisitor)
         this.valueListener = listener
     }
 

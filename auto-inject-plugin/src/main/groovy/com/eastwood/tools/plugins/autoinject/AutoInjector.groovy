@@ -25,8 +25,8 @@ class AutoInjector {
             source.eachFileRecurse { File file ->
                 String filename = file.getName()
                 if (filterClass(filename)) return
-                ClassReader classReader = new ClassReader(file.readBytes());
-                classReader.accept(bowArrowClassAdapter, 0);
+                ClassReader classReader = new ClassReader(file.readBytes())
+                classReader.accept(bowArrowClassAdapter, 0)
             }
         } else {
             JarFile jarFile = new JarFile(source)
@@ -40,11 +40,12 @@ class AutoInjector {
 
                 InputStream stream = jarFile.getInputStream(entry)
                 if (stream != null) {
-                    ClassReader classReader = new ClassReader(stream.bytes);
-                    classReader.accept(bowArrowClassAdapter, 0);
+                    ClassReader classReader = new ClassReader(stream.bytes)
+                    classReader.accept(bowArrowClassAdapter, 0)
                     stream.close()
                 }
             }
+            jarFile.close()
         }
     }
 
@@ -60,9 +61,9 @@ class AutoInjector {
                 byte[] bytes = findTargetAndInject(source, file.readBytes())
                 if (bytes != null) {
                     Logger.i('-- replace class [' + file.absolutePath + ']')
-                    FileOutputStream outputStream = new FileOutputStream(file);
-                    outputStream.write(bytes);
-                    outputStream.close();
+                    FileOutputStream outputStream = new FileOutputStream(file)
+                    outputStream.write(bytes)
+                    outputStream.close()
                 }
             }
         } else {
@@ -115,17 +116,18 @@ class AutoInjector {
                 jarOutputStream.close()
 
                 Logger.i('-- replace jar [' + source.absolutePath + ']')
-                FileOutputStream outputStream = new FileOutputStream(source);
-                outputStream.write(tempJar.bytes);
-                outputStream.close();
+                FileOutputStream outputStream = new FileOutputStream(source)
+                outputStream.write(tempJar.bytes)
+                outputStream.close()
                 tempJar.delete()
             }
+            jarFile.close()
         }
     }
 
     protected static byte[] findTargetAndInject(File source, byte[] bytes) {
         ClassWriter classWriter = new ClassWriter(0)
-//        TraceClassVisitor traceClassVisitor = new TraceClassVisitor(classWriter, new PrintWriter(System.out));
+//        TraceClassVisitor traceClassVisitor = new TraceClassVisitor(classWriter, new PrintWriter(System.out))
         boolean methodInject
         OnMethodInjectListener onMethodInjectListener = new OnMethodInjectListener() {
             @Override
@@ -135,7 +137,7 @@ class AutoInjector {
         }
         targetClassAdapter.set(classWriter, onMethodInjectListener)
         try {
-            ClassReader classReader = new ClassReader(bytes);
+            ClassReader classReader = new ClassReader(bytes)
             classReader.accept(targetClassAdapter, 0)
         } catch (Exception e) {
             String tip = "\nRead class failed when find target in source: " + source.name + "[" + source.absolutePath + "]."
