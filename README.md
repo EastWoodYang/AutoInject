@@ -190,3 +190,6 @@ Android 通用的组件自动注册、自动初始化解决方案
         initAutoBowArrow.shoot();
         ...
     }
+
+## Question or Idea
+有问题或想法可以直接加我微信: EastWoodYang
